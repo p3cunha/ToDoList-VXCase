@@ -1,0 +1,87 @@
+.form-container {
+  width: 500px;
+  margin: auto;
+  padding-top: 40px;
+}
+
+input,
+textarea {
+  background-color: #f3f5ff;
+  border-color: transparent;
+  border-radius: 4px;
+  color: #363636;
+  width: 100%;
+  text-indent: 7px;
+  width: 100%;
+  text-indent: 7px;
+  border-color: transparent;
+  border-radius: 4px;
+  color: #363636;
+  outline: none;
+  &.ng-invalid.ng-touched {
+    border-color: rgba(red, 0.8);
+
+    &.focus {
+      background-color: 0px 0px 0px 2px rgba(red, 0.1);
+    }
+  }
+}
+
+.btn {
+  border: none;
+  font-family: system-ui;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 15px 5px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-cancel {
+  text-decoration: underline;
+  color: #4a4a4a;
+
+  &:hover {
+    color: black;
+  }
+}
+
+.btn-submit {
+  background: #28a745;
+  color: #fff;
+  &:hover {
+    background: darken(#28a745, 25%);
+  }
+}
+
+.btn-submit:disabled {
+  cursor: not-allowed;
+
+}
+
+.btn-1:hover {
+  background: #2980b9;
+  padding: 20px 40px;
+}
+
+.btn-1:active {
+  background: #2980b9;
+  top: 2px;
+}
+
+.btn-1:before {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  line-height: 3;
+  font-size: 140%;
+  width: 60px;
+}

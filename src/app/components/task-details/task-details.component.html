@@ -1,0 +1,27 @@
+<div class="form-container">
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="field">
+      <label class="label">Título</label>
+      <div class="control">
+        <input type="text" class="input" formControlName="title" />
+      </div>
+    </div>
+    <br />
+
+    <div class="field">
+      <label class="label">Descrição</label>
+      <div class="control">
+        <textarea class="textarea" formControlName="description"></textarea>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-cancel is-text" type="button" (click)="cancel()">
+        Cancelar
+      </button>
+      <button class="btn btn-submit" type="submit" [disabled]="!form.valid">
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>
