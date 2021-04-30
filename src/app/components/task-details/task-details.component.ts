@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TaskService } from 'src/app/core/service/tasks.service';
+import { SettingsFacade } from 'src/app/core/settingsFacade';
 import { Task } from 'src/app/model/task.model';
-import { TaskService } from 'src/app/service/tasks.service';
 
 @Component({
   selector: 'app-task-details',
@@ -17,6 +18,7 @@ export class TaskDetailsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private taskService: TaskService,
     private route: ActivatedRoute,
+    private settingsFacade: SettingsFacade,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -34,22 +36,19 @@ export class TaskDetailsComponent implements OnInit {
   getTask(): void {
     this.route.params.subscribe(param => this.taskId = param.id);
     if (this.taskId)
-    this.taskService.getTaskById(this.taskId).subscribe((data: Task) => {
-      this.form.patchValue({
-        title: data.title,
-        description: data.description
-      })
-    });
+      this.taskService.getTaskById(this.taskId).subscribe((data: Task) => {
+        this.form.patchValue({
+          title: data.title,
+          description: data.description
+        })
+      });
   }
 
   cancel(): void {
     this.router.navigateByUrl('/');
   }
 
-  onSubmit(): void  {
-    let updateTask = this.taskService.updateTask(this.taskId, this.form.value);
-    let addTask = this.taskService.addTask(this.form.value)
-    this.taskId ?
-    updateTask.subscribe(() => this.router.navigateByUrl('/')) : addTask.subscribe(() => this.router.navigateByUrl('/'));
+  onSubmit(): void {
+    this.taskId ? this.settingsFacade.editTask(this.form.value, this.taskId) : this.settingsFacade.addTask(this.form.value);
   }
 }

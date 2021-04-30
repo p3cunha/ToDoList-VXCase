@@ -1,16 +1,16 @@
 <div class="list-container" [@listAnim]>
-  <div class="note-card-container" *ngFor="let item of taskList$ | async" [@itemAnim]>
-    <a [href]="'/editar-tarefa/' + item.id">
+  <div class="note-card-container" *ngFor="let task of taskList$ | async" [@itemAnim]>
+    <a [href]="'/editar-tarefa/' + task?.id">
       <div class="note-card-content">
-        <h2>#{{ item?.id }}</h2>
-          <h1 class="note-card-title">{{ item?.title }}</h1>
+        <h2>#{{ task?.id }}</h2>
+          <h1 class="note-card-title">{{ task?.title }}</h1>
         <div #taskBody class="note-card-body" class="form-group">
-          <p>{{ item?.description }}</p>
+          <p>{{ task?.description }}</p>
           <div #truncator class="fade-out-truncation"></div>
         </div>
       </div>
     </a>
-    <div class="x-button" (click)="deleteTask(item?.id)"></div>
+    <div class="x-button" (click)="deleteTask(task, task?.id)"></div>
   </div>
   <div class="add-button">
     <button class="btn btn-1" (click)="navigate()">Adicionar Tarefa</button>
