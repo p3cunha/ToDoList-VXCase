@@ -1,5 +1,5 @@
 <div class="list-container" [@listAnim]>
-  <div class="note-card-container" *ngFor="let task of taskList$ | async" [@itemAnim]>
+  <div class="note-card-container" *ngFor="let task of settingsFacade?.taskList$ | async" [@itemAnim]>
     <a [href]="'/editar-tarefa/' + task?.id">
       <div class="note-card-content">
         <h2>#{{ task?.id }}</h2>

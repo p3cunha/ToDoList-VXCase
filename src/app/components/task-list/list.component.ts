@@ -1,9 +1,8 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/model/task.model';
-import { TaskService } from 'src/app/core/service/tasks.service';
 import { SettingsFacade } from 'src/app/core/settingsFacade';
 
 @Component({
@@ -72,13 +71,8 @@ import { SettingsFacade } from 'src/app/core/settingsFacade';
   ]
 })
 export class ListComponent implements OnInit {
-  public taskList$: Observable<Task[]>;
-  public taskList = new Array<Task[]>();
-
-
   constructor(
     private router: Router, 
-    private taskService: TaskService,
     private settingsFacade: SettingsFacade ) { }
 
   ngOnInit(): void {
@@ -86,15 +80,14 @@ export class ListComponent implements OnInit {
   }
   
   getTaskList(): void {
-    this.settingsFacade.loadTaskList().subscribe()
-    this.taskList$ = this.settingsFacade.taskList$;
+    this.settingsFacade.loadTaskList().subscribe();
   }
 
   navigate(): Promise<boolean> {
     return this.router.navigate([`adicionar-tarefa`]);
   }
 
-  deleteTask(task, id: number): void {
+  deleteTask(task: Task, id: number): void {
     this.settingsFacade.deleteTask(task, id);
   }
 }

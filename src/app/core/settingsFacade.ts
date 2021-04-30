@@ -33,14 +33,13 @@ export class SettingsFacade {
     }
 
     editTask(task: Task, id) {
-        this.taskState.editTask(task);
         this.taskService.updateTask(id, task)
             .pipe(
                 catchError(async (err) => {
                     this.loadTaskList().subscribe();
                     console.log('Não foi possível alterar a tarefa.');
                 }))
-            .subscribe(() => this.router.navigateByUrl('/'));
+            .subscribe(() => { this.router.navigateByUrl('/').then(() => this.taskState.editTask(task)) });
     }
 
     deleteTask(task, id) {
